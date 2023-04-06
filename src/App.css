@@ -1,38 +1,157 @@
-.App {
-  text-align: center;
+/* Style for the main container */
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* Style for Header component */
+header {
+    background-color: #7c4a4a;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    box-sizing: border-box;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+h1 {
+    color: #ffffff;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.header-input {
+    flex-grow: 1;
+    margin-left: 10px;
+    padding: 8px;
+    width: 100%;
+    background-color: #fff;
+    border: none;
+    border-radius: 4px;
+    color: #000;
+    font-size: 16px;
 }
 
-.App-link {
-  color: #61dafb;
+/* Style for ItemList component */
+section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    background-color: #eae4e4;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.sort-container {
+    margin-bottom: 10px;
+}
+
+label {
+    margin-right: 5px;
+}
+
+select {
+    padding: 5px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.item-image {
+    margin-right: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.item-image img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.item-details {
+    flex-grow: 1;
+}
+
+h3 {
+    font-size: 18px;
+    margin: 0;
+}
+
+/* Style for AddItemForm component */
+form {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #d5b4b4;
+    display: flex;
+    flex-flow: row;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+    display: flex;
+    margin-bottom: 10px;
+    padding: 10px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+input[type="text"] {
+    padding: 8px;
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #ddd;
+}
+
+button[type="submit"] {
+    display: flex;
+    padding: 10px auto;
+    background-color: #0056b3;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+
+    background-color: #ff7300;
+}
+
+input[type="text"]:focus {
+    outline: none;
+    border-color: #007bff;
+}
+
+input[type="text"]::placeholder {
+    color: #999;
 }
