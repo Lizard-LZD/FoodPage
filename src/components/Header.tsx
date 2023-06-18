@@ -11,7 +11,11 @@ const Header: React.FC<HeaderProps> = ({ onSearch }) => {
 
     const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSearchTerm(e.target.value);
-        onSearch(e.target.value);
+
+    }
+
+    const handleSearch = (e: React.MouseEvent<HTMLButtonElement>) => {
+        onSearch(searchTerm);
     }
 
     return (
@@ -23,7 +27,8 @@ const Header: React.FC<HeaderProps> = ({ onSearch }) => {
                 value={searchTerm}
                 onChange={handleSearchChange}
             />
-            
+            <button onClick={handleSearch}>Search Recipes</button>
+
         </header>
     );
 }
