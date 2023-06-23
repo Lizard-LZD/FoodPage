@@ -3,6 +3,11 @@
 import React, { useState } from 'react';
 
 interface Item {
+    calories:number;
+    carbs:string;
+    fat:string;
+    likes:number;
+    protein:string;
     id: number;
     title: string;
     image: string;
@@ -28,9 +33,14 @@ const AddItemForm: React.FC<AddItemFormProps> = ({ onAddItem }) => {
         e.preventDefault();
         // Perform form validation as needed
         const newItem: Item = {
-            id: Date.now(), // Use a unique ID for demonstration purposes
+            id: Date.now(),
             title,
-            image
+            image,
+            calories: 0,
+            carbs: '',
+            fat: '',
+            likes: 0,
+            protein: ''
         };
         onAddItem(newItem);
         // Reset form fields

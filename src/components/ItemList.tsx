@@ -3,58 +3,63 @@
 import React, { useState } from 'react';
 
 interface Item {
+    calories:any;
+    carbs:any;
+    fat:any;
+    protein:any;
+    likes:number;
     id: number;
     title: string;
     image: string;
   }
+  
 
 interface ItemListProps {
     items: Item[];
+    filteredItems: Item[];
     sortType: string;
+    setSortType: (sortType: string) => void;
     onSort: (sortField: string) => void;
 }
 
-const ItemList: React.FC<ItemListProps> = ({ items, sortType, onSort }) => {
+const ItemList: React.FC<ItemListProps> = ({ filteredItems, sortType, setSortType, onSort }) => {
 
-    const [sortField, setSortField] = useState('');
 
     const handleSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         const field = e.target.value;
-        setSortField(field);
         onSort(field);
+        setSortType(field)
     }
-
-    const sortedItems = [...items].sort((a, b) => {
-        if (sortField === 'id') {
-            return a.id - b.id;
-        } else if (sortField === 'title') {
-            return a.title.localeCompare(b.title);
-        } else {
-            // Sort by other attributes as needed
-            return 0;
-        }
-    });
 
     return (
         <section>
             <h2>Food List</h2>
             <div className="sort-container">
                 <label htmlFor="sortSelect">Sort by:</label>
-                <select id="sortSelect" value={sortField} onChange={handleSortChange}>
+                <select id="sortSelect" onChange={handleSortChange}>
                     <option value="">None</option>
-                    <option value="id">ID</option>
                     <option value="title">title</option>
+                    <option value="likes">likes</option>
+                    <option value="calories">calories</option>
+                    <option value="carbs">carbs</option>
+                    <option value="protein">protein</option>
+                    <option value="fat">fat</option>
                     {/* Add other attributes for sorting as needed */}
                 </select>
             </div>
             <ul>
-                {sortedItems.map(item => (
+                {filteredItems.map(item => (
                     <li key={item.id}>
                         <div className="item-image">
                             <img src={item.image} alt={item.title} />
                         </div>
                         <div className="item-details">
                             <h3>{item.title}</h3>
+                            <p>likes:{item.likes} </p>
+                            <p>calories:{item.calories} </p>
+                            <p>carbs:{item.carbs} </p>
+                            <p>protein:{item.protein} </p>
+                            <p>fat:{item.fat}</p>
                             {/* Display other item details as needed */}
                         </div>
                     </li>
