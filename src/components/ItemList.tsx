@@ -3,26 +3,28 @@
 import React, { useState } from 'react';
 
 interface Item {
-    calories:any;
-    carbs:any;
-    fat:any;
-    protein:any;
-    likes:number;
+    calories: any;
+    carbs: any;
+    fat: any;
+    protein: any;
+    likes: number;
     id: number;
     title: string;
     image: string;
-  }
-  
+}
+
 
 interface ItemListProps {
     items: Item[];
     filteredItems: Item[];
     sortType: string;
+    offset: number;
     setSortType: (sortType: string) => void;
     onSort: (sortField: string) => void;
+    setOffset: (offset: number) => void;
 }
 
-const ItemList: React.FC<ItemListProps> = ({ filteredItems, sortType, setSortType, onSort }) => {
+const ItemList: React.FC<ItemListProps> = ({ filteredItems, sortType, setSortType, onSort, offset, setOffset }) => {
 
 
     const handleSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -47,8 +49,9 @@ const ItemList: React.FC<ItemListProps> = ({ filteredItems, sortType, setSortTyp
                     {/* Add other attributes for sorting as needed */}
                 </select>
             </div>
+
             <ul>
-                {filteredItems.map(item => (
+                {filteredItems.slice(offset, offset + 10).map(item => (
                     <li key={item.id}>
                         <div className="item-image">
                             <img src={item.image} alt={item.title} />
@@ -65,6 +68,12 @@ const ItemList: React.FC<ItemListProps> = ({ filteredItems, sortType, setSortTyp
                     </li>
                 ))}
             </ul>
+
+            <div className='page-button'>
+                <button onClick={() => { setOffset(offset >= 10 ? offset - 10 : 0); window.scrollTo({ top: 0, behavior: "smooth" }); }}>《</button>
+                <p>{offset / 10 + 1}</p>
+                <button onClick={() => { setOffset(offset >= 90 ? 0 : offset + 10); window.scrollTo({ top: 0, behavior: "smooth" }); }}>》</button>
+            </div>
         </section>
     );
 }

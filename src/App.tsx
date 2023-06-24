@@ -35,6 +35,7 @@ const App: React.FC = () => {
   const [filteredItems, setFilteredItems] = useState<Item[]>([]);
   const [sortType, setSortType] = useState('');
   const [prompt, setPrompt] = useState('');
+  const [offset, setOffset] = useState(0);
 
   useEffect(() => {
     // Fetch data from API endpoint using Axios
@@ -44,8 +45,8 @@ const App: React.FC = () => {
         url: 'https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/searchComplex',
         params: {
           limitLicense: 'false',
-          offset: '0',
-          number: '10',
+          offset: offset,
+          number: '100',
           minIron: '0',
           minCalcium: '0',
           maxVitaminB2: '1000',
@@ -191,7 +192,12 @@ const App: React.FC = () => {
   return (
     <div>
       <Header onSearch={handleSearch} />
-      <ItemList items={items} filteredItems={filteredItems} sortType={sortType} setSortType={setSortType} onSort={handleSort} />
+      <ItemList
+        items={items}
+        filteredItems={filteredItems}
+        sortType={sortType}
+        offset={offset}
+        setSortType={setSortType} onSort={handleSort} setOffset={setOffset} />
       <AddItemForm onAddItem={handleAddItem} />
     </div>
   );
