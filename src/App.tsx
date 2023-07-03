@@ -33,6 +33,7 @@ function getNumericValue(value: any) {
 const App: React.FC = () => {
   const [items, setItems] = useState<Item[]>([]);
   const [filteredItems, setFilteredItems] = useState<Item[]>([]);
+  const [dietItems, setDietItems] = useState<Item[]>([]);
   const [sortType, setSortType] = useState('');
   const [prompt, setPrompt] = useState('');
   const [offset, setOffset] = useState(0);
@@ -189,15 +190,33 @@ const App: React.FC = () => {
     setFilteredItems([...items, newItem]);
   }
 
+  const handleRemoveDiet = (item: Item) => {
+    const itemIndex = dietItems.findIndex((dietItem) => dietItem.id === item.id);
+    if (itemIndex !== -1) {
+      const updatedDietItems = [...dietItems];
+      updatedDietItems.splice(itemIndex, 1);
+      setDietItems(updatedDietItems);
+    }
+  };
+
+  const handleAddDiet = (item: Item) => {
+
+    const updatedDietItems = [...dietItems, item];
+    setDietItems(updatedDietItems);
+  }
+
   return (
     <div>
-      <Header onSearch={handleSearch} />
+      <Header onSearch={handleSearch} setSortType={setSortType} handleSort={handleSort} dietItems={dietItems} handleRemoveDiet={handleRemoveDiet} handleAddDiet={handleAddDiet} />
       <ItemList
         items={items}
         filteredItems={filteredItems}
+        dietItems={dietItems}
         sortType={sortType}
         offset={offset}
-        setSortType={setSortType} onSort={handleSort} setOffset={setOffset} />
+        setOffset={setOffset}
+        handleRemoveDiet={handleRemoveDiet}
+        handleAddDiet={handleAddDiet} />
       <AddItemForm onAddItem={handleAddItem} />
     </div>
   );

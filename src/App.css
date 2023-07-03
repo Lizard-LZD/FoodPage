@@ -12,27 +12,38 @@ header {
     background-color: #7c4a4a;
     width: 100%;
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    justify-content: space-around;
     align-items: center;
     padding: 10px;
     box-sizing: border-box;
+    position: fixed;
 }
 
 h1 {
     color: #ffffff;
 }
 
-.header-input {
-    flex-grow: 1;
-    margin-left: 10px;
-    padding: 8px;
-    width: 100%;
-    background-color: #fff;
-    border: none;
-    border-radius: 4px;
-    color: #000;
-    font-size: 16px;
+.search-container,.sort-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
 }
+
+.sort-container {
+    margin-bottom: 10px;
+}
+
+label {
+    margin-right: 5px;
+    color: #fff;
+}
+
+select {
+    padding: 5px;
+}
+
 
 /* Style for ItemList component */
 section {
@@ -42,23 +53,13 @@ section {
     align-items: center;
     margin-bottom: 20px;
     background-color: #eae4e4;
+    padding-top: 190px;
 }
+
 
 h2 {
     font-size: 20px;
     margin-bottom: 10px;
-}
-
-.sort-container {
-    margin-bottom: 10px;
-}
-
-label {
-    margin-right: 5px;
-}
-
-select {
-    padding: 5px;
 }
 
 .page-button {

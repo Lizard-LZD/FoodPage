@@ -17,38 +17,21 @@ interface Item {
 interface ItemListProps {
     items: Item[];
     filteredItems: Item[];
+    dietItems: Item[];
     sortType: string;
     offset: number;
-    setSortType: (sortType: string) => void;
-    onSort: (sortField: string) => void;
     setOffset: (offset: number) => void;
+    handleRemoveDiet: (item: Item) => void;
+    handleAddDiet: (item: Item) => void;
 }
 
-const ItemList: React.FC<ItemListProps> = ({ filteredItems, sortType, setSortType, onSort, offset, setOffset }) => {
+const ItemList: React.FC<ItemListProps> = ({ filteredItems, offset, setOffset, handleRemoveDiet, handleAddDiet }) => {
 
 
-    const handleSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-        const field = e.target.value;
-        onSort(field);
-        setSortType(field)
-    }
 
     return (
         <section>
             <h2>Food List</h2>
-            <div className="sort-container">
-                <label htmlFor="sortSelect">Sort by:</label>
-                <select id="sortSelect" onChange={handleSortChange}>
-                    <option value="">None</option>
-                    <option value="title">title</option>
-                    <option value="likes">likes</option>
-                    <option value="calories">calories</option>
-                    <option value="carbs">carbs</option>
-                    <option value="protein">protein</option>
-                    <option value="fat">fat</option>
-                    {/* Add other attributes for sorting as needed */}
-                </select>
-            </div>
 
             <ul>
                 {filteredItems.slice(offset, offset + 10).map(item => (
@@ -64,6 +47,12 @@ const ItemList: React.FC<ItemListProps> = ({ filteredItems, sortType, setSortTyp
                             <p>protein:{item.protein} </p>
                             <p>fat:{item.fat}</p>
                             {/* Display other item details as needed */}
+                        </div>
+
+                        <div className='item-button'>
+                            <button onClick={() => handleRemoveDiet(item)}>-</button>
+                            { }
+                            <button onClick={() => handleAddDiet(item)}>+</button>
                         </div>
                     </li>
                 ))}
