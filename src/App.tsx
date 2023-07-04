@@ -17,6 +17,7 @@ interface Item {
   id: number;
   title: string;
   image: string;
+  count: number;
 }
 
 // get numberic value
@@ -136,6 +137,10 @@ const App: React.FC = () => {
       };
       axios.request(options).then(function (response) {
 
+        response.data.results.forEach((item: Item) => {
+          item.count = 0;
+        });
+
         setItems(response.data.results);
         setFilteredItems(response.data.results);
         console.log(items);
@@ -194,16 +199,26 @@ const App: React.FC = () => {
     const itemIndex = dietItems.findIndex((dietItem) => dietItem.id === item.id);
     if (itemIndex !== -1) {
       const updatedDietItems = [...dietItems];
-      updatedDietItems.splice(itemIndex, 1);
+      if (updatedDietItems[itemIndex].count > 1) { updatedDietItems[itemIndex].count -= 1 }
+      else { updatedDietItems[itemIndex].count = 0; updatedDietItems.splice(itemIndex, 1) };
+      setDietItems(updatedDietItems);
+    } else return
+  };
+
+  const handleAddDiet = (item: Item) => {
+    const existingItemIndex = dietItems.findIndex((existingItem) => existingItem.id === item.id);
+
+    if (existingItemIndex !== -1) {
+      const updatedDietItems = [...dietItems];
+      updatedDietItems[existingItemIndex].count += 1;
+      setDietItems(updatedDietItems);
+    } else {
+      const updatedDietItems = [...dietItems, item];
+      item.count += 1;
       setDietItems(updatedDietItems);
     }
   };
 
-  const handleAddDiet = (item: Item) => {
-
-    const updatedDietItems = [...dietItems, item];
-    setDietItems(updatedDietItems);
-  }
 
   return (
     <div>

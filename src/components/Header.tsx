@@ -22,6 +22,7 @@ interface Item {
     id: number;
     title: string;
     image: string;
+    count: number;
 }
 
 interface HeaderProps {
@@ -60,10 +61,10 @@ const Header: React.FC<HeaderProps> = ({ onSearch, handleSort, setSortType, diet
 
         // Iterate over dietItems and accumulate the nutrition values
         dietItems.forEach((item) => {
-            totalCalories += getNumericValue(item.calories);
-            totalCarbs += getNumericValue(item.carbs);
-            totalFat += getNumericValue(item.fat);
-            totalProtein += getNumericValue(item.protein);
+            totalCalories += getNumericValue(item.calories)*item.count;
+            totalCarbs += getNumericValue(item.carbs)*item.count;
+            totalFat += getNumericValue(item.fat)*item.count;
+            totalProtein += getNumericValue(item.protein)*item.count;
         });
 
         return {
@@ -104,16 +105,18 @@ const Header: React.FC<HeaderProps> = ({ onSearch, handleSort, setSortType, diet
                 <button onClick={() => setShowDiet(!showDiet)}>My diet</button>
                 {showDiet ? <div className='diet-list'>
                     <ul>
-                        {dietItems.map(item => (
-                            <li key={item.id}>
+                        {dietItems.map((item, index) => (
+                            <li key={index}>
                                 {item.title}
+                                <div className='diet-item-button'>
                                 <button onClick={() => handleRemoveDiet(item)}>-</button>
-                                
+                                {item.count}
                                 <button onClick={() => handleAddDiet(item)}>+</button>
+                                </div>
                             </li>))}
                     </ul>
                     <p>
-                        Total nutrition:
+                        Total nutrition:<br/>
                         {calculateTotalNutrition().calories} calories,
                         {calculateTotalNutrition().carbs} carbs,
                         {calculateTotalNutrition().fat} fat,

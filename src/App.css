@@ -24,7 +24,8 @@ h1 {
     color: #ffffff;
 }
 
-.search-container,.sort-container {
+.search-container,
+.sort-container {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -43,6 +44,29 @@ label {
 select {
     padding: 5px;
 }
+
+.diet-container {
+    position: relative;
+
+}
+
+.diet-list ul{
+    position: absolute;
+    top: 5vw;
+    left: 30vw;
+    width: 20vw;
+    height: 50vh;
+    overflow-y: scroll;
+    border: 1px solid;
+    padding: 5px;
+}
+
+.diet-list li,.diet-item-button {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
 
 
 /* Style for ItemList component */

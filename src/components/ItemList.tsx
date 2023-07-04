@@ -11,6 +11,7 @@ interface Item {
     id: number;
     title: string;
     image: string;
+    count: number;
 }
 
 
@@ -51,7 +52,7 @@ const ItemList: React.FC<ItemListProps> = ({ filteredItems, offset, setOffset, h
 
                         <div className='item-button'>
                             <button onClick={() => handleRemoveDiet(item)}>-</button>
-                            { }
+                            {item.count}
                             <button onClick={() => handleAddDiet(item)}>+</button>
                         </div>
                     </li>
